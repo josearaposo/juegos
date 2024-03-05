@@ -49,11 +49,11 @@
                                 {{$videojuego->distribuidora}}
                             </a>
                         </th>
-{{--                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             @if ($videojuego->existeImagen())
                                 <img src="{{ asset($videojuego->imagen_url) }}" />
                             @endif
-                        </th> --}}
+                        </th>
 
                         <td class="px-6 py-4">
                             <a href="{{ route('videojuegos.edit', ['videojuego' => $videojuego]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">

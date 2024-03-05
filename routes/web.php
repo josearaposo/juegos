@@ -5,6 +5,7 @@ use App\Http\Controllers\Desarrolladora as ControllersDesarrolladora;
 use App\Http\Controllers\DesarrolladoraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideojuegoController;
+use App\Livewire\Busqueda;
 use App\Models\Desarrolladora;
 use App\Models\Videojuego;
 use Illuminate\Support\Facades\Route;
@@ -43,10 +44,10 @@ Route::resource('/videojuegos', VideojuegoController::class)
 Route::resource('/desarrolladoras', DesarrolladoraController::class)
 ->middleware('auth');
 
-Route::get('/cambiar_imagen/{desarrolladora}', [DesarrolladoraController::class, 'cambiar_imagen'])
+Route::get('/cambiarImagDes/{desarrolladora}', [DesarrolladoraController::class, 'cambiar_imagen'])
     ->name('desarrolladora.cambiar_imagen')->whereNumber('desarrolladora');
 
-Route::post('/cambiar_imagen/{desarrolladora}', [DesarrolladoraController::class, 'guardar_imagen'])
+Route::post('/cambiarImagDes/{desarrolladora}', [DesarrolladoraController::class, 'guardar_imagen'])
 ->name('desarrolladora.guardar_imagen')->whereNumber('desarrolladora');
 
 Route::get('/cambiar_imagen/{videojuego}', [VideojuegoController::class, 'cambiar_imagen'])
@@ -60,5 +61,6 @@ Route::get('/comentarios/create/{comentable}/{tipo}/{videojuego}', [ComentarioCo
 
 Route::post('/comentarios/store/{comentable}/{tipo}/{videojuego}', [ComentarioController::class, 'store'])
 ->name('guardar_comentario');
+
 
 require __DIR__.'/auth.php';

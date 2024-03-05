@@ -120,11 +120,11 @@ class VideojuegoController extends Controller
         $imagen = $request->file('imagen');
         Storage::makeDirectory('public/uploads');
         // $imagen->storeAs('uploads', $nombre, 'public');
-/*          $imagen_original = $imagen; */
+        $imagen_original = $imagen;
         $manager = new ImageManager(new Driver());
         $videojuego->guardarImagen($imagen, $videojuego->imagen, 400, $manager, $videojuego);
-/*         $imagen = $imagen_original;
-        $videojuego->guardarImagen($imagen, $videojuego->miniatura, 200, $manager); */
+        $imagen = $imagen_original;
+        $videojuego->guardarImagen($imagen, $videojuego->miniatura, 200, $manager, $videojuego);
         return redirect()->route('videojuegos.index');
     }
 }

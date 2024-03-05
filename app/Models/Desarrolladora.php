@@ -30,6 +30,15 @@ class Desarrolladora extends Model
         return $this->morphOne(Imagen::class, 'imagenable');
     }
 
+    private function imagen_url_relativa()
+    {
+        return '/uploads/desa' . $this->imagen;
+    }
+
+    private function miniatura_url_relativa()
+    {
+        return '/uploads/desa' . $this->miniatura;
+    }
     public function getImagenAttribute()
     {
         return $this->id . '.' . self::MIME_IMAGEN;

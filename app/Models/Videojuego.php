@@ -41,6 +41,16 @@ class Videojuego extends Model
         return $this->morphOne(Imagen::class, 'imagenable');
     }
 
+    private function imagen_url_relativa()
+    {
+        return '/uploads/' . $this->imagen;
+    }
+
+    private function miniatura_url_relativa()
+    {
+        return '/uploads/' . $this->miniatura;
+    }
+
     public function getImagenAttribute()
     {
         return $this->id . '.' . self::MIME_IMAGEN;

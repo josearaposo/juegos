@@ -5,7 +5,7 @@
 
             <!-- Imagen -->
             <div>
-                <x-input-label for="imagen" :value="'Imagen del Juego'" />
+                <x-input-label for="imagen" :value="'Imagen de la desarroladora'" />
                 <x-text-input id="imagen" class="block mt-1 w-full"
                     type="file" name="imagen" :value="old('imagen')" required
                     autofocus autocomplete="imagen" />

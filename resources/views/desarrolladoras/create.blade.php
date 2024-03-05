@@ -1,15 +1,15 @@
 <x-app-layout>
     <div class="w-1/2 mx-auto">
-        <form method="POST" action="{{ route('videojuegos.store') }}">
+        <form method="POST" action="{{ route('desarrolladoras.store') }}">
             @csrf
 
-            <!-- Titulo -->
+            <!-- nombre -->
             <div>
-                <x-input-label for="titulo" :value="'Titulo del Juego'" />
-                <x-text-input id="titulo" class="block mt-1 w-full" type="text" name="titulo" :value="old('titulo')"
-                    required autofocus autocomplete="titulo" {{-- pattern="[A-Z]{2}\d{4}"
+                <x-input-label for="nombre" :value="'nombre de la desarrolladora'" />
+                <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')"
+                    required autofocus autocomplete="nombre" {{-- pattern="[A-Z]{2}\d{4}"
                     title="El código de vuelo debe tener el formato 'XXNNNN'" --}} />
-                <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
+                <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
             </div>
 
             <!-- Año -->
@@ -38,7 +38,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{ route('videojuegos.index') }}">
+                <a href="{{ route('desarrolladoras.index') }}">
                     <x-secondary-button class="ms-4">
                         Volver
                         </x-primary-button>
