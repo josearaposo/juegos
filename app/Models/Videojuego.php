@@ -135,6 +135,7 @@ class Videojuego extends Model
                 </a>
                 </button>
 
+
                 </section>';
 
                 if (count($comentario->comentarios) > 0){

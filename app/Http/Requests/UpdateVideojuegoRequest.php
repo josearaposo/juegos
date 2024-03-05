@@ -11,7 +11,7 @@ class UpdateVideojuegoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateVideojuegoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'titulo' => 'unique:videojuegos,titulo|required',
+            'anyo' => 'integer|required',
+            'desarrolladora_id' => 'exists:desarrolladoras,id|required'
         ];
     }
 }

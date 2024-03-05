@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
 use App\Models\Videojuego;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,8 +76,13 @@ class ComentarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comentario $comentario, Videojuego $videojuego)
     {
-        //
+        $this->authorize('delete', $comentario);
+        $comentario->delete();
+
+        return redirect()->route('videojuego.show', [
+            'videojuego' => $videojuego,
+        ]);
     }
 }

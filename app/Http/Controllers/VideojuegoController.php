@@ -8,6 +8,8 @@ use App\Models\Desarrolladora;
 use App\Models\Distribuidora;
 use App\Models\Videojuego;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -27,10 +29,13 @@ class VideojuegoController extends Controller
         $order = $request->query('order', 'desarrolladora');
         $order_dir = $request->query('order_dir', 'asc');
 
+
         $videojuegos = Videojuego::with(['desarrolladora'])
             ->selectRaw('videojuegos.* , desarrolladoras.nombre as desarrolladora, distribuidoras.nombre as distribuidora')
             ->leftJoin('desarrolladoras', 'videojuegos.desarrolladora_id', '=', 'desarrolladoras.id')
             ->leftJoin('distribuidoras', 'desarrolladoras.distribuidora_id', '=', 'distribuidoras.id')
+            ->leftJoin('posesiones', 'posesiones.videojuego_id', '=', 'videojuegos.id')
+            ->where('posesiones.user_id', '=', $request->user()->id)
             ->orderBy($order, $order_dir)
             ->orderBy('desarrolladora')
             ->paginate(3);
@@ -73,6 +78,7 @@ class VideojuegoController extends Controller
      */
     public function show(Videojuego $videojuego)
     {
+
         return view('videojuegos.show', [
             'videojuego' => $videojuego,
         ]);
@@ -83,7 +89,11 @@ class VideojuegoController extends Controller
      */
     public function edit(Videojuego $videojuego)
     {
-        //
+        return view('videojuegos.edit', [
+            'videojuego' => $videojuego,
+            'desarrolladoras' => Desarrolladora::all(),
+            'distribuidoras' => Distribuidora::all(),
+        ]);
     }
 
     /**
@@ -91,7 +101,9 @@ class VideojuegoController extends Controller
      */
     public function update(UpdateVideojuegoRequest $request, Videojuego $videojuego)
     {
-        //
+        $validated = $this->validar($request);
+        $videojuego->update($validated);
+        return redirect()->route('videojuegos.index');
     }
 
     /**

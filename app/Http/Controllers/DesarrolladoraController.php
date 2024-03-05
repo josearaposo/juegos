@@ -6,6 +6,7 @@ use App\Http\Requests\DesarrolladoraRequest;
 use App\Models\Desarrolladora;
 use App\Models\Distribuidora;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -13,6 +14,7 @@ class DesarrolladoraController extends Controller
 {
     public function index(Request $request)
     {
+        /* $desarrolladoras = DB::table('desarrolladoras')->orderBy('nombre'); */
         return view('desarrolladoras.index', [
             'desarrolladoras' => Desarrolladora::all(),
         ]);
