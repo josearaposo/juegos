@@ -4,25 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideojuegoRequest;
 use App\Http\Requests\UpdateVideojuegoRequest;
+use App\Models\Desarrolladora;
+use App\Models\Distribuidora;
 use App\Models\Videojuego;
 use Illuminate\Http\Request;
 
 class VideojuegoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Videojuego::class, 'videojuego');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $order = $request->query('order', 'denominacion');
+        $order = $request->query('order', 'desarrolladora');
         $order_dir = $request->query('order_dir', 'asc');
 
+        $videojuegos = Videojuego::with(['desarrolladora'])
+            ->selectRaw('videojuegos.* , desarrolladoras.nombre as desarrolladora, distribuidoras.nombre as distribuidora')
+            ->leftJoin('desarrolladoras', 'videojuegos.desarrolladora_id', '=', 'desarrolladoras.id')
+            ->leftJoin('distribuidoras', 'desarrolladoras.distribuidora_id', '=', 'distribuidoras.id')
+            ->orderBy($order, $order_dir)
+            ->orderBy('desarrolladora')
+            ->paginate(3);
         return view('videojuegos.index', [
-            'videojuegos' => Videojuego::all(),
+            'videojuegos' => $videojuegos,
             'order' => $order,
             'order_dir' => $order_dir,
         ]);
     }
+
+
     public function poseo()
     {
         //
@@ -33,7 +49,10 @@ class VideojuegoController extends Controller
      */
     public function create()
     {
-        //
+        return view('videojuegos.create', [
+            'desarrolladoras' => Desarrolladora::all(),
+            'distribuidoras' => Distribuidora::all(),
+        ]);
     }
 
     /**
@@ -41,7 +60,9 @@ class VideojuegoController extends Controller
      */
     public function store(StoreVideojuegoRequest $request)
     {
-        //
+        $validate = $request->validated();
+        Videojuego::create($validate);
+        return redirect()->route('videojuegos.index');
     }
 
     /**

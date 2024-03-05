@@ -13,7 +13,7 @@ class VideojuegoPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class VideojuegoPolicy
      */
     public function view(User $user, Videojuego $videojuego): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class VideojuegoPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class VideojuegoPolicy
      */
     public function update(User $user, Videojuego $videojuego): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class VideojuegoPolicy
      */
     public function delete(User $user, Videojuego $videojuego): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class VideojuegoPolicy
      */
     public function restore(User $user, Videojuego $videojuego): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class VideojuegoPolicy
      */
     public function forceDelete(User $user, Videojuego $videojuego): bool
     {
-        //
+        return true;
     }
 }

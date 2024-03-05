@@ -9,6 +9,12 @@ class Videojuego extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'titulo',
+        'anyo' ,
+        'desarrolladora_id',
+    ];
+
     public function desarrolladora()
     {
         return $this->belongsTo(Desarrolladora::class);

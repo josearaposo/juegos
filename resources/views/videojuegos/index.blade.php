@@ -27,6 +27,7 @@
             </thead>
             <tbody>
                 @foreach ($videojuegos as $videojuego)
+               {{--  {{ dd($videojuego) }} --}}
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <a class="text-blue-500 blue" href="{{ route('videojuegos.show', $videojuego) }}">
@@ -40,12 +41,12 @@
                         </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <a class="text-blue-500 blue" href="{{ route('videojuegos.show', $videojuego) }}">
-                                {{$videojuego->desarrolladora->nombre}}
+                                {{$videojuego->desarrolladora}}
                             </a>
                         </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <a class="text-blue-500 blue" href="{{ route('videojuegos.show', $videojuego) }}">
-                                {{$videojuego->desarrolladora->distribuidora->nombre }}
+                                {{$videojuego->distribuidora}}
                             </a>
                         </th>
 
