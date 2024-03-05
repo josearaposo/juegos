@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Videojuego::class, 'posesiones');
     }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
 }

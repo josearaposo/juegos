@@ -20,7 +20,7 @@
                         </a>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Salida
+                        Acciones
                     </th>
 
                 </tr>
@@ -49,11 +49,23 @@
                                 {{$videojuego->distribuidora}}
                             </a>
                         </th>
+{{--                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @if ($videojuego->existeImagen())
+                                <img src="{{ asset($videojuego->imagen_url) }}" />
+                            @endif
+                        </th> --}}
 
                         <td class="px-6 py-4">
                             <a href="{{ route('videojuegos.edit', ['videojuego' => $videojuego]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                 <x-primary-button>
                                     Editar
+                                </x-primary-button>
+                            </a>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('videojuegos.cambiar_imagen', ['videojuego' => $videojuego]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                <x-primary-button>
+                                    Cambiar imagen
                                 </x-primary-button>
                             </a>
                         </td>

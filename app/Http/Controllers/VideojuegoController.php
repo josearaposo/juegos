@@ -8,6 +8,9 @@ use App\Models\Desarrolladora;
 use App\Models\Distribuidora;
 use App\Models\Videojuego;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class VideojuegoController extends Controller
 {
@@ -70,7 +73,9 @@ class VideojuegoController extends Controller
      */
     public function show(Videojuego $videojuego)
     {
-        //
+        return view('videojuegos.show', [
+            'videojuego' => $videojuego,
+        ]);
     }
 
     /**
@@ -95,5 +100,31 @@ class VideojuegoController extends Controller
     public function destroy(Videojuego $videojuego)
     {
         //
+    }
+
+        public function cambiar_imagen(Videojuego $videojuego)
+    {
+        return view('videojuegos.cambiar_imagen', [
+            'videojuego' => $videojuego,
+        ]);
+    }
+
+    public function guardar_imagen(Videojuego $videojuego, Request $request)
+    {
+        $mime = Videojuego::MIME_IMAGEN;
+
+        $request->validate([
+            'imagen' => "required|mimes:$mime|max:500",
+        ]);
+
+        $imagen = $request->file('imagen');
+        Storage::makeDirectory('public/uploads');
+        // $imagen->storeAs('uploads', $nombre, 'public');
+/*          $imagen_original = $imagen; */
+        $manager = new ImageManager(new Driver());
+        $videojuego->guardarImagen($imagen, $videojuego->imagen, 400, $manager, $videojuego);
+/*         $imagen = $imagen_original;
+        $videojuego->guardarImagen($imagen, $videojuego->miniatura, 200, $manager); */
+        return redirect()->route('videojuegos.index');
     }
 }
